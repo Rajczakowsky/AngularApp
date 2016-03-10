@@ -1,1 +1,9 @@
-var testApp = angular.module('testApp', ['ui.router']);
+(function (){
+    'use strict';
+
+    angular.module('testApp', [
+        'ui.router',
+        'templates'
+    ]);
+
+}());

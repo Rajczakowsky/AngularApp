@@ -1,1 +1,1 @@
-angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("home/_template.html","<div><h1>boooooo </h1></div>");}]);
+angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("home/_template.html","<ul>\n    <li ng-repeat=\"filter in home.filters\" ng-click=\"home.select($index)\" ng-class=\"{red: $index == home.selected}\" class=\"list-inline\">\n        {{filter.time}}\n    </li>\n</ul>");}]);
