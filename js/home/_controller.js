@@ -8,35 +8,38 @@
     function Controller ($scope, $state) {
         var home = this;
 
+        home.select = select;
+
         console.log('controler')
         
         home.filters = [
             {
                 'filterId': 1,
-                'time': 'last 24 hours',
+                'time': '1',
             },
             {
                 'filterId': 2,
-                'time': 'all',
+                'time': '2',
             },
             {
                 'filterId': 3,
-                'time': 'last hour',
+                'time': '3',
             },
             {
                 'filterId': 4,
-                'time': 'today',
+                'time': '4',
             },
             {
                 'filterId': 5,
-                'time': 'yersteday',
+                'time': '5',
             }
         ];
         
 	    home.selected = 0;
 
-	    home.select= function(index) {
+        function select(index) {
 	       home.selected = index; 
+           console.log('function');
 	    };
     }
 }());

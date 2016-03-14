@@ -7,7 +7,8 @@
     ]);
 
 }());
-angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("home/_template.html","<ul>\n    <li ng-repeat=\"filter in home.filters\" ng-click=\"home.select($index)\" ng-class=\"{red: $index == home.selected}\" class=\"list-inline\">\n        {{filter.time}}\n    </li>\n</ul>");}]);
+angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("home/_template.html","<div class=\"row\">\n	<div class=\"col-xs-12 text-center\">\n		<span nav-dir></span>\n	</div>\n</div>");
+$templateCache.put("home/nav.html","<div>Yes\n<ul class=\"list-inline\">\n    <li ng-repeat=\"filter in home.filters\" ng-click=\"home.select($index)\" ng-class=\"{red: $index == home.selected}\" class=\"list-inline\">\n        <a href=\"#\">{{filter.time}}</a>\n    </li>\n</ul>\n</div>");}]);
 (function () {
     'use strict';
 
@@ -19,35 +20,38 @@ angular.module("templates", []).run(["$templateCache", function($templateCache) 
     function Controller ($scope, $state) {
         var home = this;
 
+        home.select = select;
+
         console.log('controler')
         
         home.filters = [
             {
                 'filterId': 1,
-                'time': 'last 24 hours',
+                'time': '1',
             },
             {
                 'filterId': 2,
-                'time': 'all',
+                'time': '2',
             },
             {
                 'filterId': 3,
-                'time': 'last hour',
+                'time': '3',
             },
             {
                 'filterId': 4,
-                'time': 'today',
+                'time': '4',
             },
             {
                 'filterId': 5,
-                'time': 'yersteday',
+                'time': '5',
             }
         ];
         
 	    home.selected = 0;
 
-	    home.select= function(index) {
+        function select(index) {
 	       home.selected = index; 
+           console.log('function');
 	    };
     }
 }());
@@ -67,5 +71,32 @@ angular.module("templates", []).run(["$templateCache", function($templateCache) 
                 resolve: {},
                 controller: 'HomeController as home'
             });
+    }
+}());
+(function () {
+    'use strict';
+
+    angular
+        .module('testApp')
+        .directive('navDir', Directive);
+
+    // Element: <div twig-drop-file ></div>
+    // Attributes:
+
+    function Directive () {
+        var directive = {
+            templateUrl: 'home/nav.html',
+            replace: true,
+            restrict: 'A',
+            scope: {
+            },
+            link: link
+        };
+
+        return directive;
+
+        function link (scope, element, attrs) {
+        	console.log('boooooo');
+        }
     }
 }());
